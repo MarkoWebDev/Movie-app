@@ -7,6 +7,10 @@ module.exports = withMT({
       fontFamily: {
         lato: ["Lato", "sans-serif"],
       },
+      colors: {
+        "background-dark": "#060d17",
+        "gray": "#999c9f",
+      },
     },
   },
   plugins: [],
