@@ -28,7 +28,7 @@ const HeroHeader = () => {
       <div className="flex w-full justify-between items-center">
         {/* left side with date */}
         <div className="flex items-center">
-          <p className="text-white font-lato font-black text-4xl leading-10 py-2">
+          <p className="text-white font-lato font-black text-4xl leading-10 ">
             Discover daily
           </p>
           <div className="flex flex-col w-12 h-12 justify-center box-border ml-4">
