@@ -8,7 +8,7 @@ const Navbar = () => {
     <WrapperContainer>
       <div className="flex sticky top-0 bg-background-dark w-full h-14 items-center z-[100]">
         <div>
-          <img className="h-4" src={logo} alt="logo"></img>
+          <img className="h-5" src={logo} alt="logo"></img>
         </div>
         <div className="flex justify-end w-full items-center overflow-visible">
           {/* navigation links */}
