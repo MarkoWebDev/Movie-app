@@ -6,6 +6,7 @@ import HeroCarousel from "../modules/navbar/HeroCarousel";
 import GridMovies from "../modules/movie-top-list/GridMovies";
 import Spinner from "../shared/Spinner/Spinner";
 import MoviesRows from "../modules/MoviesRows/MoviesRows";
+import ErrorDialog from "../core/ErrorDialog";
 
 const HomePage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -17,6 +18,7 @@ const HomePage = () => {
   return (
     <div>
       <Navbar></Navbar>
+      <ErrorDialog></ErrorDialog>
       <HeroHeader></HeroHeader>
       {!loading ? (
         <div>
