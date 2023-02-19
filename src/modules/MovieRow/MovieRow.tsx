@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer } from "react";
+import React, { useCallback, useEffect, useReducer, useContext } from "react";
 import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
 import axios from "axios";
 import {
@@ -7,6 +7,7 @@ import {
   MovieReducer,
 } from "../../shared/MovieReducer/MovieReducer";
 import Carousel from "../Carousel/Carousel";
+import { InterceptorContext } from "../../core/ErrorInterceptorContext";
 
 interface MovieRowProps {
   title: string;
@@ -15,7 +16,9 @@ interface MovieRowProps {
 
 const MovieRow = ({ title, movieApiUrl }: MovieRowProps) => {
   const [state, dispatch] = useReducer(MovieReducer, initialState);
+  const { handleAddError } = useContext<any>(InterceptorContext);
 
+  //base URL
   const url = "https://image.tmdb.org/t/p/original/";
 
   /**
@@ -28,10 +31,14 @@ const MovieRow = ({ title, movieApiUrl }: MovieRowProps) => {
       const response = await axios.get(movieApiUrl);
       const data = await response.data.results;
       dispatch({ type: actionTypes.FETCH_SUCCESS, movies: data });
-    } catch (error) {
-      dispatch({ type: actionTypes.FETCH_ERROR });
+    } catch (err) {
+      if (err) {
+        handleAddError(err);
+        console.log(err);
+        dispatch({ type: actionTypes.FETCH_ERROR });
+      }
     }
-  }, [movieApiUrl]);
+  }, [movieApiUrl, handleAddError]);
 
   useEffect(() => {
     getMovies();
@@ -54,15 +61,16 @@ const MovieRow = ({ title, movieApiUrl }: MovieRowProps) => {
                     className={"flex items-center cursor-pointer relative "}
                     key={movie.id}
                   >
-                    {index < 9 ? (
-                      <div className="absolute scale-150 text-[#222c38] font-lato left-0 bottom-10 text-9xl font-bold">
-                        {index + 1}
-                      </div>
-                    ) : (
-                      <div className="absolute scale-150 text-[#222c38] font-lato -left-8 bottom-10 text-9xl font-bold">
-                        {index + 1}
-                      </div>
-                    )}
+                    <div
+                      className={`${
+                        index < 9
+                          ? "absolute scale-150 text-[#222c38] font-lato left-0 bottom-10 text-9xl font-bold"
+                          : "absolute scale-150 text-[#222c38] font-lato -left-8 bottom-10 text-9xl font-bolds"
+                      }`}
+                    >
+                      {index + 1}
+                    </div>
+
                     <div className="ml-16 z-10">
                       <img
                         className="h-full w-44 bg-center bg-no-repeat bg-cover rounded-md "
