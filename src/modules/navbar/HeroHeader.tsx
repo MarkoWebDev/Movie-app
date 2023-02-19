@@ -1,8 +1,8 @@
 import React from "react";
-import netflixLogo from "../../../assets/images/netflix.webp";
-import primeLogo from "../../../assets/images/prime.webp";
-import icon from "../../../assets/images/icon.webp";
-import WrapperContainer from "../../../shared/WrapperContainer";
+import netflixLogo from "../../assets/images/netflix.webp";
+import primeLogo from "../../assets/images/prime.webp";
+import icon from "../../assets/images/icon.webp";
+import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
 import { useLocation } from "react-router-dom";
 
 const HeroHeader = () => {
@@ -23,6 +23,8 @@ const HeroHeader = () => {
   let { pathname } = useLocation();
   const day: number = new Date().getDate();
   const month: number = new Date().getMonth();
+
+  console.log("HeroHeader running");
 
   return (
     <WrapperContainer>

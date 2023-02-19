@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@material-tailwind/react";
 
 const Footer = () => {
+  console.log("Footer running");
   return (
     <div>
       <div className="flex justify-center flex-col items-center p-5">
@@ -22,6 +23,7 @@ const Footer = () => {
           >
             Pogledajte što je novo
           </Button>
+
           <Button
             size="sm"
             variant="filled"

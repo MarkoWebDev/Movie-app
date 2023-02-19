@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../../../assets/images/logo.webp";
+import logo from "../../assets/images/logo.webp";
 import { Button } from "@material-tailwind/react";
-import WrapperContainer from "../../../shared/WrapperContainer";
+import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,9 @@ const Navbar = () => {
   let activeStyle = {
     color: "white",
   };
+
+  console.log("Navbar runnings");
+
   return (
     <WrapperContainer>
       <div className="flex sticky top-0 bg-background-dark w-full h-14 items-center z-[100]">
@@ -34,7 +37,7 @@ const Navbar = () => {
             Novo
           </NavLink>
           <NavLink
-            to="favorites"
+            to="/favorites"
             className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
