@@ -2,28 +2,44 @@ import React from "react";
 import logo from "../../../assets/images/logo.webp";
 import { Button } from "@material-tailwind/react";
 import WrapperContainer from "../../../shared/WrapperContainer";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  let activeStyle = {
+    color: "white",
+  };
   return (
     <WrapperContainer>
       <div className="flex sticky top-0 bg-background-dark w-full h-14 items-center z-[100]">
         <div>
-          <img className="h-5" src={logo} alt="logo"></img>
+          <Link to="/">
+            <img className="h-5" src={logo} alt="logo"></img>
+          </Link>
         </div>
         <div className="flex justify-end w-full items-center overflow-visible">
           {/* navigation links */}
-          <p className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full">
+          <NavLink
+            to="/"
+            className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
             Početna
-          </p>
-          <p className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full">
+          </NavLink>
+          <NavLink
+            to="/discovery"
+            className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
             Novo
-          </p>
-          <p className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full">
-            Najgledanije
-          </p>
-          <p className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full">
+          </NavLink>
+          <NavLink
+            to="favorites"
+            className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
             Moja lista
-          </p>
+          </NavLink>
           {/* //search input */}
           <div className="flex z-[1] grow-[2] h-12 items-center mx-4">
             <div className="flex items-center w-full h-12 z-10 p-0 ">
