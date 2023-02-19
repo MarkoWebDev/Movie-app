@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../index.css";
 
 interface CarouselProps {
   children: any;
   show: number;
+  movieRow: boolean;
 }
 
-const Carousel = ({ children, show }: CarouselProps) => {
+const Carousel = ({ children, show, movieRow }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [display, setDisplay] = useState<boolean>(false);
   let length: number = children.length;
@@ -25,7 +26,11 @@ const Carousel = ({ children, show }: CarouselProps) => {
   return (
     <div>
       <div
-        className={`w-full flex relative h-48 mx-auto `}
+        className={`${
+          movieRow
+            ? "w-full flex relative h-64 mx-auto"
+            : "w-full flex relative h-44 mx-auto"
+        } `}
         onMouseEnter={() => setDisplay(true)}
         onMouseLeave={() => setDisplay(false)}
       >

@@ -1,8 +1,9 @@
 import React from "react";
-import WrapperContainer from "../../../shared/WrapperContainer";
-import CarouselWrapper from "../../Carousel/CarouselWrapper";
+import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
+import CarouselWrapper from "../Carousel/CarouselWrapper";
 
 const HeroCarousel = () => {
+  console.log("HeroCarousel running");
   return (
     <WrapperContainer>
       <div className="flex ">

@@ -1,9 +1,10 @@
 import React from "react";
-import WrapperContainer from "../../shared/WrapperContainer";
+import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
 import { gridData } from "../../shared/data";
 import { platforms } from "../../shared/data";
 
 const GridMovies = () => {
+  console.log("GridMovies running");
   return (
     <WrapperContainer>
       <div>
@@ -27,13 +28,13 @@ const GridMovies = () => {
           })}
           {gridData.map((item) => {
             return (
-              <div className="ml-6" key={item.id}>
+              <div className="ml-6 my-2" key={item.id}>
                 <div className="flex items-center relative ">
                   <span className="absolute scale-150 text-[#222c38] font-lato -left-6 text-4xl font-bold">
                     {item.number}
                   </span>
                   <img
-                    className="h-16 z-10"
+                    className="h-16 z-10 rounded-sm"
                     src={item.image}
                     alt={item.name}
                   ></img>

@@ -7,7 +7,7 @@ const CarouselWrapper = () => {
   const date: number = new Date().getFullYear();
   return (
     <div>
-      <Carousel show={2}>
+      <Carousel movieRow={false} show={2}>
         {/* first card */}
         {data.map((item) => {
           return (
