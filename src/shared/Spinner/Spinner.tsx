@@ -3,7 +3,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 
 const Spinner = () => {
   return (
-    <div>
+    <div >
       <div className="grid h-screen object-fit bg-gray-800">
         <div className="flex justify-center ">
           <PulseLoader

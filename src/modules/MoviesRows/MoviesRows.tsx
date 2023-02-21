@@ -3,12 +3,11 @@ import MovieRow from "../MovieRow/MovieRow";
 import { movieURLAddress } from "../../shared/MovieApiKeys/MovieGenres";
 
 const MoviesRows = () => {
-  console.log("api", movieURLAddress.TopRatedMovies);
   return (
     <div>
       <MovieRow
         title="🇭🇷: top 10 danas"
-        movieApiUrl={movieURLAddress.TopRatedMovies}
+        movieApiUrl={movieURLAddress.TopRatedTV}
       ></MovieRow>
       <MovieRow
         title="Family Animation"
