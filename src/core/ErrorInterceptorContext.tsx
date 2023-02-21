@@ -5,8 +5,6 @@ export const InterceptorContext = createContext<null | {}>(null);
 const ErrorInterceptorContext = ({ children }: any) => {
   const [error, setError] = useState<any>(null);
 
-  console.log("error", error);
-
   const handleRemoveError = () => {
     setError(null);
   };

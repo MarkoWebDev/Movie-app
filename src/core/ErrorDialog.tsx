@@ -14,9 +14,9 @@ const ErrorDialog = () => {
 
   return (
     <div>
-      {error ? (
+      {error && (
         <Card className="w-96 absolute right-4 top-16 z-10">
-          <CardBody className="text-center bg-[#F43F5E] rounded-lg  w-full">
+          <CardBody className="text-center bg-background-dark rounded-lg  w-full border-2 border-white">
             <div className="mb-2 w-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,19 +48,17 @@ const ErrorDialog = () => {
           </CardBody>
           <CardFooter
             divider
-            className="flex items-center justify-center py-4 "
+            className="flex items-center justify-center py-4 bg-background-dark border-2 border-white"
           >
             <Button
               size="sm"
-              className="bg-[#F43F5E] rounded-xl"
+              className="bg-white text-background-dark rounded-xl"
               onClick={closeModal}
             >
               Close
             </Button>
           </CardFooter>
         </Card>
-      ) : (
-        ""
       )}
     </div>
   );

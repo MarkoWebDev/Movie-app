@@ -34,7 +34,7 @@ const MovieRow = ({ title, movieApiUrl }: MovieRowProps) => {
     } catch (err) {
       if (err) {
         handleAddError(err);
-        console.log(err);
+
         dispatch({ type: actionTypes.FETCH_ERROR });
       }
     }
