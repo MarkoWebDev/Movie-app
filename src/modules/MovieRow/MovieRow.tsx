@@ -34,7 +34,6 @@ const MovieRow = ({ title, movieApiUrl }: MovieRowProps) => {
     } catch (err) {
       if (err) {
         handleAddError(err);
-
         dispatch({ type: actionTypes.FETCH_ERROR });
       }
     }
@@ -47,7 +46,7 @@ const MovieRow = ({ title, movieApiUrl }: MovieRowProps) => {
   console.log("state", state);
 
   return (
-    <WrapperContainer>
+    <WrapperContainer singlePage={false}>
       {movieApiUrl && (
         <div className="">
           <h3 className="text-white font-lato font-black text-3xl leading-10 pb-4">
@@ -77,7 +76,7 @@ const MovieRow = ({ title, movieApiUrl }: MovieRowProps) => {
                         src={`${url}${
                           movie?.poster_path || movie?.backdrop_path
                         } `}
-                        alt={movie.name}
+                        alt={movie.title}
                       ></img>
                     </div>
                   </div>

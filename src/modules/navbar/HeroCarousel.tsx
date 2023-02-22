@@ -5,7 +5,7 @@ import CarouselWrapper from "../Carousel/CarouselWrapper";
 const HeroCarousel = () => {
   console.log("HeroCarousel running");
   return (
-    <WrapperContainer>
+    <WrapperContainer singlePage={false}>
       <div className="flex ">
         <div className="overflow-hidden mr-4">
           <CarouselWrapper></CarouselWrapper>

@@ -4,6 +4,7 @@ import HomePage from "../../Pages/HomePage";
 import DiscoveryPage from "../../Pages/DiscoveryPage";
 import ErrorInterceptorContext from "../../core/ErrorInterceptorContext";
 import GlobalContext from "../../shared/GlobalContext/GlobalContext";
+import SingleMoviePage from "../../Pages/SingleMoviePage";
 
 const Layout = () => {
   return (
@@ -16,6 +17,10 @@ const Layout = () => {
               <Route
                 path="/discovery"
                 element={<DiscoveryPage></DiscoveryPage>}
+              ></Route>
+              <Route
+                path="movieDetails/:id"
+                element={<SingleMoviePage></SingleMoviePage>}
               ></Route>
             </Routes>
           </GlobalContext>

@@ -6,7 +6,7 @@ import { platforms } from "../../shared/data";
 const GridMovies = () => {
   console.log("GridMovies running");
   return (
-    <WrapperContainer>
+    <WrapperContainer singlePage={false}>
       <div>
         <h3 className="text-white font-lato font-black text-3xl leading-10 pb-4">
           Današnja top-lista

@@ -27,7 +27,7 @@ const HeroHeader = () => {
   console.log("HeroHeader running");
 
   return (
-    <WrapperContainer>
+    <WrapperContainer singlePage={false}>
       {pathname === "/" && (
         <div className="flex w-full justify-between items-center">
           {/* left side with date */}

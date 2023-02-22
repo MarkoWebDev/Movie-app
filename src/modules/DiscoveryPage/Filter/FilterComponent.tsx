@@ -4,6 +4,7 @@ import { GlobalMovieContext } from "../../../shared/GlobalContext/GlobalContext"
 import Carousel from "../../Carousel/Carousel";
 import axios from "axios";
 import Spinner from "../../../shared/Spinner/Spinner";
+import { Link, useParams } from "react-router-dom";
 
 const FilterComponent = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -11,8 +12,13 @@ const FilterComponent = () => {
   const parseGetFromSession = JSON.parse(getFromSession);
   const [genresButtons, setGenresButtons] = useState<any[]>([]);
   // const genresButtons = JSON.parse(getFromSession);
-  const { state, getFilteredMovies, getMoviesByYear, getLastMovies } =
-    useContext<any>(GlobalMovieContext);
+  const {
+    state,
+    getFilteredMovies,
+    getMoviesByYear,
+    getLastMovies,
+    getSingleMovieDetails,
+  } = useContext<any>(GlobalMovieContext);
   const [loading, setLoading] = useState<boolean>(false);
   const [slider, setSlider] = useState<any>(10);
 
@@ -109,9 +115,10 @@ const FilterComponent = () => {
 
   return (
     <>
-      <WrapperContainer>
+      <WrapperContainer singlePage={false}>
         <div className="grid grid-cols-4">
-          <input
+          <input className="rotate-[270deg]"
+            
             name="rating"
             type="range"
             min={1}
@@ -155,33 +162,36 @@ const FilterComponent = () => {
                   ?.slice(0, 10)
                   .map((movie: any, index: number) => {
                     return (
-                      <div
-                        className={"flex items-center cursor-pointer relative "}
-                        key={movie.id}
-                      >
+                      <Link to={`/movieDetails/${movie.id}`} key={movie.id}>
                         <div
-                          className={`${
-                            index < 9
-                              ? "absolute scale-150 text-[#222c38] font-lato left-0 bottom-10 text-9xl font-bold"
-                              : "absolute scale-150 text-[#222c38] font-lato -left-8 bottom-10 text-9xl font-bolds"
-                          }`}
+                          className={
+                            "flex items-center cursor-pointer relative "
+                          }
                         >
-                          {index + 1}
-                        </div>
+                          <div
+                            className={`${
+                              index < 9
+                                ? "absolute scale-150 text-[#222c38] font-lato left-0 bottom-10 text-9xl font-bold"
+                                : "absolute scale-150 text-[#222c38] font-lato -left-8 bottom-10 text-9xl font-bolds"
+                            }`}
+                          >
+                            {index + 1}
+                          </div>
 
-                        <div
-                          className="ml-16 z-10"
-                          onClick={() => console.log("item", movie)}
-                        >
-                          <img
-                            className="h-full w-44 bg-center bg-no-repeat bg-cover rounded-md "
-                            src={`${url}${
-                              movie?.poster_path || movie?.backdrop_path
-                            } `}
-                            alt={movie.name}
-                          ></img>
+                          <div
+                            className="ml-16 z-10"
+                            onClick={() => getSingleMovieDetails(movie)}
+                          >
+                            <img
+                              className="h-full w-44 bg-center bg-no-repeat bg-cover rounded-md "
+                              src={`${url}${
+                                movie?.poster_path || movie?.backdrop_path
+                              } `}
+                              alt={movie.title}
+                            ></img>
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                     );
                   })}
               </Carousel>
