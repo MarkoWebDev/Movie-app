@@ -13,7 +13,7 @@ const Navbar = () => {
   console.log("Navbar runnings");
 
   return (
-    <WrapperContainer>
+    <WrapperContainer singlePage={false}>
       <div className="flex sticky top-0 bg-background-dark w-full h-14 items-center z-[100]">
         <div>
           <Link to="/">
