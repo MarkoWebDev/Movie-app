@@ -1,14 +1,43 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import logo from "../../assets/images/logo.webp";
-import { Button } from "@material-tailwind/react";
 import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
+import FavoriteMovies from "../FavoriteMovies/FavoriteMovies";
+import axios from "axios";
+import { InterceptorContext } from "../../core/ErrorInterceptorContext";
 
 const Navbar = () => {
   let activeStyle = {
     color: "white",
   };
+
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const [query, setQuery] = useState<string>("");
+  const { handleAddError } = useContext<any>(InterceptorContext);
+
+  const [movie, setMovie] = useState<any[]>([]);
+
+  const searchMovies = async () => {
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
+    try {
+      const response = await axios.get(searchUrl);
+      const data = await response.data.results[0];
+      if (data) {
+        setMovie(data);
+      }
+      return;
+    } catch (error) {
+      handleAddError(error);
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (query.length > 0) {
+      searchMovies();
+    }
+  }, [query]);
 
   console.log("Navbar runnings");
 
@@ -36,13 +65,7 @@ const Navbar = () => {
           >
             Novo
           </NavLink>
-          <NavLink
-            to="/favorites"
-            className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-          >
-            Moja lista
-          </NavLink>
+          <FavoriteMovies></FavoriteMovies>
           {/* //search input */}
           <div className="flex z-[1] grow-[2] h-12 items-center mx-4">
             <div className="flex items-center w-full h-12 z-10 p-0 ">
@@ -63,6 +86,8 @@ const Navbar = () => {
 
               <input
                 id="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 name="search"
                 type="text"
                 placeholder="Pretražite filmove ili serije"

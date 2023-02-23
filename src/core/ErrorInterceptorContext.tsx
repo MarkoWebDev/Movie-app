@@ -10,7 +10,7 @@ const ErrorInterceptorContext = ({ children }: any) => {
   };
 
   const handleAddError = useCallback((error: {}) => {
-    setError( error );
+    setError(error);
   }, []);
 
   const initialState = {
