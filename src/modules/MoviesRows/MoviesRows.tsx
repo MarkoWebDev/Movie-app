@@ -6,10 +6,12 @@ const MoviesRows = () => {
   return (
     <div>
       <MovieRow
+        grid={false}
         title="🇭🇷: top 10 danas"
-        movieApiUrl={movieURLAddress.TopRatedTV}
+        movieApiUrl={movieURLAddress.TvPopular}
       ></MovieRow>
       <MovieRow
+        grid={false}
         title="Family Animation"
         movieApiUrl={movieURLAddress.AnimationMovies}
       ></MovieRow>

@@ -3,7 +3,7 @@ import Navbar from "../modules/navbar/Navbar";
 import Footer from "../modules/footer/Footer";
 import HeroHeader from "../modules/navbar/HeroHeader";
 import HeroCarousel from "../modules/navbar/HeroCarousel";
-import GridMovies from "../modules/movie-top-list/GridMovies";
+import GridMovies from "../modules/MovieIconsGrid/GridMovies";
 import Spinner from "../shared/Spinner/Spinner";
 import MoviesRows from "../modules/MoviesRows/MoviesRows";
 import ErrorDialog from "../core/ErrorDialog";
