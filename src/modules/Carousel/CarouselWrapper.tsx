@@ -15,7 +15,7 @@ const CarouselWrapper = () => {
               className="flex relative w-full bg-[#10161d] rounded-xl h-full overflow-hidden mr-2"
               key={item.id}
             >
-              <div className="flex w-44">
+              <div className="flex w-32">
                 <img
                   src={item.image}
                   alt="image1"
@@ -54,7 +54,7 @@ const CarouselWrapper = () => {
                   </Button>
                 </div>
               </div>
-              <div className="flex absolute bottom-0 w-1/2 bg-gradient-to-r from-yellow-600 via-orange-400 to-red-500  h-2">
+              <div className="flex absolute bottom-0 w-1/2 bg-gradient-to-r from-yellow-600 via-orange-400 to-red-500 h-2">
                 <span className="flex justify-end absolute -bottom-1 w-full ml-2">
                   🔥
                 </span>

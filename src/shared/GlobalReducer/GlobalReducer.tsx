@@ -54,7 +54,10 @@ export const GlobalReducer = (state: any, action: any) => {
         return {
           ...state,
           flag: true,
-          favorites: [...state.favorites, action.payload],
+          favorites: [
+            ...state.favorites,
+            { ...action.payload, isFavorite: !false },
+          ],
         };
       return {
         ...state,
