@@ -22,7 +22,7 @@ const FavoriteMovies = () => {
           </p>
         </MenuHandler>
         <MenuList className="bg-background-dark">
-          {state?.favorites.length > 0 ? (
+          {state?.favorites?.length > 0 ? (
             <div>
               {state?.favorites?.map((item: any) => {
                 return (

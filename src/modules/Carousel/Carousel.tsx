@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../index.css";
+
 
 interface CarouselProps {
   children: any;
@@ -8,9 +9,25 @@ interface CarouselProps {
 }
 
 const Carousel = ({ children, show, movieRow }: CarouselProps) => {
+  const getWindowSize = () => {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  };
+  const [windowSize, setWindowSize] = useState(getWindowSize());
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [display, setDisplay] = useState<boolean>(false);
   let length: number = children.length;
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [length]);
 
   const nextButton = () => {
     if (currentIndex < length - show) {
@@ -22,6 +39,18 @@ const Carousel = ({ children, show, movieRow }: CarouselProps) => {
       setCurrentIndex((prev) => prev - 1);
     }
   };
+
+  let carouselDisplay;
+
+  if (windowSize.innerWidth <= 1260 && windowSize.innerWidth > 761) {
+    show = 2;
+    carouselDisplay = `show-${show}`;
+  } else if (windowSize.innerWidth <= 760 && windowSize.innerWidth > 0) {
+    show = 1;
+    carouselDisplay = `show-${show}`;
+  } else {
+    carouselDisplay = `show-${show}`;
+  }
 
   return (
     <div>
@@ -63,7 +92,7 @@ const Carousel = ({ children, show, movieRow }: CarouselProps) => {
               style={{
                 transform: `translateX(-${currentIndex * (100 / show)}%)`,
               }}
-              className={`carousel-content show-${show}`}
+              className={`carousel-content show-${show} ${carouselDisplay}`}
             >
               {children}
             </div>

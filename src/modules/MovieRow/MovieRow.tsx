@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useContext, useState } from "react";
 import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
 import axios from "axios";
-
 import Carousel from "../Carousel/Carousel";
 import { InterceptorContext } from "../../core/ErrorInterceptorContext";
+import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 
 interface MovieRowProps {
   title: string;
@@ -12,6 +12,8 @@ interface MovieRowProps {
 }
 
 const MovieRow = ({ title, movieApiUrl, grid }: MovieRowProps) => {
+  const isTablet = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 540px)");
   const [movieData, setMovieData] = useState<any[]>([]);
   const { handleAddError } = useContext<any>(InterceptorContext);
 
@@ -43,10 +45,14 @@ const MovieRow = ({ title, movieApiUrl, grid }: MovieRowProps) => {
   return (
     <WrapperContainer singlePage={false}>
       {grid ? (
-        <div className="grid grid-cols-4">
+        <div
+          className={
+            isTablet ? "grid grid-cols-3 justify-start" : "grid grid-cols-4"
+          }
+        >
           {movieData?.slice(0, 10).map((movie: any, index: number) => {
             return (
-              <div className="ml-6 my-2" key={movie.id}>
+              <div className={isTablet ? " my-2" : "ml-6 my-2"} key={movie.id}>
                 <div className="flex items-center relative ">
                   <img
                     className="h-16 w-14 bg-center bg-no-repeat bg-cover rounded-md "
@@ -54,7 +60,13 @@ const MovieRow = ({ title, movieApiUrl, grid }: MovieRowProps) => {
                     alt={movie.original_name}
                   ></img>
                   <div className="ml-4">
-                    <p className="font-lato font-bold text-white overflow-hidden text-base leading-6">
+                    <p
+                      className={
+                        isMobile
+                          ? "font-lato font-bold text-white text-xs overflow-hidden leading-6"
+                          : "font-lato font-bold text-white overflow-hidden text-base leading-6"
+                      }
+                    >
                       {movie.original_name}
                     </p>
                   </div>

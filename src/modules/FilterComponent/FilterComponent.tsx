@@ -4,8 +4,10 @@ import { GlobalMovieContext } from "../../shared/GlobalContext/GlobalContext";
 import axios from "axios";
 import { InterceptorContext } from "../../core/ErrorInterceptorContext";
 import { Button } from "@material-tailwind/react";
+import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 
 const FilterComponent = () => {
+  const isMobile = useMediaQuery("(max-width: 540px)");
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [genresButtons, setGenresButtons] = useState<any[]>([]);
   const { state, getFilteredMovies } = useContext<any>(GlobalMovieContext);
@@ -65,7 +67,13 @@ const FilterComponent = () => {
   return (
     <>
       <WrapperContainer singlePage={false}>
-        <div className="grid grid-cols-4 content-center">
+        <div
+          className={
+            isMobile
+              ? "grid grid-cols-2 content-center py-4"
+              : "grid grid-cols-4 content-center"
+          }
+        >
           {/* <input
             className="rotate-[270deg]"
             name="rating"
