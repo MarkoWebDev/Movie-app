@@ -2,9 +2,9 @@ import React from "react";
 import FilterComponent from "../FilterComponent/FilterComponent";
 import MovieRow from "../MovieRow/MovieRow";
 import { movieURLAddress } from "../../shared/MovieApiKeys/MovieGenres";
-import MoviesLayout from "../GridMoviesDiscoveryPage/MoviesLayout";
+import MoviesLayout from "../GridMoviesPage/MoviesLayout";
 
-const DiscoveryLayout = () => {
+const MoviesLayoutSection = () => {
   return (
     <div>
       <FilterComponent></FilterComponent>
@@ -18,4 +18,4 @@ const DiscoveryLayout = () => {
   );
 };
 
-export default DiscoveryLayout;
+export default MoviesLayoutSection;

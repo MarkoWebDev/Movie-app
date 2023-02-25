@@ -2,14 +2,17 @@ import React, { useContext } from "react";
 import { Button } from "@material-tailwind/react";
 import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 import { GlobalMovieContext } from "../../shared/GlobalContext/GlobalContext";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const { handleScroll } = useContext<any>(GlobalMovieContext);
   const isDesktop = useMediaQuery("(max-width: 1024px)");
   const isMobile = useMediaQuery("(max-width: 520px)");
+  let { pathname } = useLocation();
+  console.log("location", pathname);
   console.log("Footer running");
   return (
-    <div>
+    <div className={pathname !== "/" ? "bg-background-dark" : "bg-black"}>
       <div className="flex justify-center flex-col items-center p-5">
         <span className={isDesktop ? "text-6xl mb-10 pt-4" : "text-7xl mb-10"}>
           👋
@@ -58,7 +61,7 @@ const Footer = () => {
           size="sm"
           variant="text"
           className={
-            isMobile
+            isMobile && pathname !== "/"
               ? "text-white font-medium	font-lato mr-4 text-sm normal-case border mt-4 border-orange-400 bg-transparent text-ellipsis overflow-hidden"
               : "hidden"
           }

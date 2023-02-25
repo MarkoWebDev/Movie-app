@@ -13,12 +13,12 @@ const WrapperContainer = ({ children, singlePage }: WrappperProps) => {
     <div
       className={`${
         singlePage
-          ? "flex  justify-center items-center w-full pb-4 h-full "
-          : "pl-16 pr-16 w-full max-w-[1900px] pb-4"
+          ? "flex justify-center items-center w-full pb-4 h-full "
+          : "pl-16 pr-16 w-full pb-4"
           ? isDesktop
             ? "px-4 w-full"
-            : "pl-16 pr-16 w-full max-w-[1900px] pb-4"
-          : "pl-16 pr-16 w-full max-w-[1900px] pb-4"
+            : "pl-16 pr-16 w-full pb-4"
+          : "pl-16 pr-16 w-full pb-4"
       } `}
     >
       {children}
