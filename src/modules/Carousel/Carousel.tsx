@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../index.css";
-
+import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 
 interface CarouselProps {
   children: any;
@@ -13,6 +13,7 @@ const Carousel = ({ children, show, movieRow }: CarouselProps) => {
     const { innerWidth, innerHeight } = window;
     return { innerWidth, innerHeight };
   };
+  const isMobile = useMediaQuery("(max-width: 850px)");
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [display, setDisplay] = useState<boolean>(false);
@@ -42,10 +43,10 @@ const Carousel = ({ children, show, movieRow }: CarouselProps) => {
 
   let carouselDisplay;
 
-  if (windowSize.innerWidth <= 1260 && windowSize.innerWidth > 761) {
+  if (windowSize.innerWidth <= 1260 && windowSize.innerWidth > 721) {
     show = 2;
     carouselDisplay = `show-${show}`;
-  } else if (windowSize.innerWidth <= 760 && windowSize.innerWidth > 0) {
+  } else if (windowSize.innerWidth <= 640 && windowSize.innerWidth > 0) {
     show = 1;
     carouselDisplay = `show-${show}`;
   } else {
@@ -99,7 +100,13 @@ const Carousel = ({ children, show, movieRow }: CarouselProps) => {
           </div>
           {/* next button */}
           <div className="relative ">
-            <div className="bg-background-dark p-8 rounded-md absolute -right-6 -mt-4 h-56 blur"></div>
+            <div
+              className={
+                isMobile
+                  ? "bg-background-dark p-8 rounded-md absolute -right-4 -mt-2 h-56 blur"
+                  : "bg-background-dark p-8 rounded-md absolute -right-6 -mt-4 h-56 blur"
+              }
+            ></div>
             {display && currentIndex < length - show && (
               <button
                 onClick={nextButton}

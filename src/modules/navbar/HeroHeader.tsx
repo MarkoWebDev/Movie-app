@@ -31,8 +31,14 @@ const HeroHeader = () => {
   return (
     <div>
       <WrapperContainer singlePage={false}>
-        {pathname === "/" && (
-          <div className="flex w-full justify-between items-center">
+        {pathname === "/discovery" && (
+          <div
+            className={
+              isMobile
+                ? "flex w-full justify-between items-center pt-2"
+                : "flex w-full justify-between items-center pt-12"
+            }
+          >
             {/* left side with date */}
             <div className="flex items-center">
               <p
@@ -84,9 +90,8 @@ const HeroHeader = () => {
             </div>
           </div>
         )}
-
-        {pathname === "/discovery" && (
-          <div>
+        {pathname === "/novo" && (
+          <div className="pt-8">
             <h1 className="text-white font-lato font-semibold text-xl leading-10 py-2">
               Novi i nedavno dodani filmovi i serije
             </h1>

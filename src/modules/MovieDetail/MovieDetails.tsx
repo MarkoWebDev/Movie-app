@@ -5,7 +5,8 @@ import { Button } from "@material-tailwind/react";
 import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 
 const MovieDetails = () => {
-  const isMobile = useMediaQuery("(max-width: 640px)");
+  const isMobile = useMediaQuery("(max-width: 830px)");
+  const isDesktop = useMediaQuery("(max-width: 831px)");
   const { state, addToFavorites } = useContext<any>(GlobalMovieContext);
   const url = "https://image.tmdb.org/t/p/original/";
 
@@ -22,14 +23,16 @@ const MovieDetails = () => {
       <WrapperContainer singlePage={true}>
         <div
           className={
-            isMobile ? "flex flex-col justify-center items-center" : ""
+            isMobile
+              ? "flex flex-col justify-center items-center"
+              : "flex justify-center items-center w-full"
           }
         >
           <div
             className={
               isMobile
                 ? "w-full flex justify-center items-center"
-                : "flex flex-col h-full justify-center w-[700px] bg-background-dark"
+                : "flex flex-col h-full justify-center w-[700px] bg-background-dark "
             }
           >
             <div className="flex w-full justify-center items-center mx-auto">
@@ -39,6 +42,10 @@ const MovieDetails = () => {
                     isMobile
                       ? "h-screen w-full bg-background-dark bg-center bg-no-repeat bg-cover rounded-md "
                       : "h-screen w-[900px] bg-background-dark bg-center bg-no-repeat bg-cover rounded-md "
+                      ? isDesktop
+                        ? "h-screen w-[900px] bg-background-dark bg-center bg-no-repeat bg-cover rounded-md "
+                        : ""
+                      : ""
                   }
                   src={`${url}${
                     state?.movieDetails?.poster_path ||
@@ -61,7 +68,7 @@ const MovieDetails = () => {
                 className={
                   isMobile
                     ? "w-full hidden"
-                    : "h-full w-[450px] bg-center bg-no-repeat bg-cover rounded-md "
+                    : "h-full w-full bg-center bg-no-repeat bg-cover rounded-md "
                 }
                 src={`${url}${
                   state?.movieDetails?.poster_path ||
@@ -74,50 +81,78 @@ const MovieDetails = () => {
                   isMobile
                     ? "flex flex-col justify-end items-start pt-4"
                     : "pt-4 "
+                    ? isDesktop
+                      ? "flex flex-col items-center text-center w-full"
+                      : "pt-4"
+                    : "pt-4"
                 }
               >
-                <p className="text-[#78a6b8] font-lato font-medium text-sm leading-4 pb-4 uppercase">
+                <p
+                  className={
+                    isDesktop
+                      ? "text-[#78a6b8] font-lato font-medium text-xs leading-4 pb-4 uppercase"
+                      : "text-[#78a6b8] font-lato font-medium text-sm leading-4 pb-4 uppercase"
+                  }
+                >
                   ocjena{" "}
                   <span
                     className={
                       isMobile
-                        ? "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-0"
+                        ? "text-white font-lato font-medium text-xs leading-4 pb-4 uppercase pl-0"
                         : "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-4"
                     }
                   >
                     {state?.movieDetails?.vote_average}
                   </span>
                 </p>
-                <p className="text-[#78a6b8] font-lato font-medium text-sm leading-4 pb-4 uppercase">
+                <p
+                  className={
+                    isDesktop
+                      ? "text-[#78a6b8] font-lato font-medium text-xs leading-4 pb-4 uppercase"
+                      : "text-[#78a6b8] font-lato font-medium text-sm leading-4 pb-4 uppercase"
+                  }
+                >
                   popularity{" "}
                   <span
                     className={
                       isMobile
-                        ? "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-0"
+                        ? "text-white font-lato font-medium text-xs leading-4 pb-4 uppercase pl-0"
                         : "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-4"
                     }
                   >
                     {state?.movieDetails?.popularity}
                   </span>
                 </p>
-                <p className="text-[#78a6b8] font-lato font-medium text-sm leading-4 pb-4 uppercase">
+                <p
+                  className={
+                    isDesktop
+                      ? "text-[#78a6b8] font-lato font-medium text-xs leading-4 pb-4 uppercase"
+                      : "text-[#78a6b8] font-lato font-medium text-sm leading-4 pb-4 uppercase"
+                  }
+                >
                   vote{" "}
                   <span
                     className={
                       isMobile
-                        ? "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-0"
+                        ? "text-white font-lato font-medium text-xs leading-4 pb-4 uppercase pl-0"
                         : "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-4"
                     }
                   >
                     {state?.movieDetails?.vote_count}
                   </span>
                 </p>
-                <p className="text-[#78a6b8] font-lato font-medium text-sm leading-4 uppercase">
+                <p
+                  className={
+                    isDesktop
+                      ? "text-[#78a6b8] font-lato font-medium text-xs leading-4 pb-4 uppercase"
+                      : "text-[#78a6b8] font-lato font-medium text-sm leading-4 pb-4 uppercase"
+                  }
+                >
                   Adult
                   <span
                     className={
                       isMobile
-                        ? "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-0"
+                        ? "text-white font-lato font-medium text-xs leading-4 pb-4 uppercase pl-0"
                         : "text-white font-lato font-medium text-sm leading-4 pb-4 uppercase pl-4"
                     }
                   >
@@ -149,9 +184,9 @@ const MovieDetails = () => {
                 </p>
               </div>
               {state?.favorites?.map((item: any) => {
-                if (item?.id === state?.movieDetails?.id)
+                if (item?.id === state?.movieDetails?.id) {
                   return (
-                    <div className="pb-4 ">
+                    <div className="pb-4 " key={item.id}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -168,6 +203,7 @@ const MovieDetails = () => {
                       </svg>
                     </div>
                   );
+                }
               })}
               <Button
                 onClick={() => addToFavorites(state?.movieDetails)}

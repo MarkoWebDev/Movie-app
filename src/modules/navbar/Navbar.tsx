@@ -1,14 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import logo from "../../assets/images/logo.webp";
 import WrapperContainer from "../../shared/WrapperContainer/WrapperContainer";
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import FavoriteMovies from "../FavoriteMovies/FavoriteMovies";
-import axios from "axios";
-import { InterceptorContext } from "../../core/ErrorInterceptorContext";
 import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 import { GlobalMovieContext } from "../../shared/GlobalContext/GlobalContext";
+import Search from "./Search";
 
 const Navbar = () => {
   let activeStyle = {
@@ -16,36 +14,11 @@ const Navbar = () => {
   };
 
   const isDesktop = useMediaQuery("(max-width: 1024px)");
-
-  const API_KEY = process.env.REACT_APP_API_KEY;
-  const [query, setQuery] = useState<string>("");
-  const { handleAddError } = useContext<any>(InterceptorContext);
   const { sectionTop } = useContext<any>(GlobalMovieContext);
 
-  const [movie, setMovie] = useState<any[]>([]);
-
-  const searchMovies = async () => {
-    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
-    try {
-      const response = await axios.get(searchUrl);
-      const data = await response.data.results[0];
-      if (data) {
-        setMovie(data);
-      }
-      return;
-    } catch (error) {
-      handleAddError(error);
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    if (query.length > 0) {
-      searchMovies();
-    }
-  }, [query]);
-
   console.log("Navbar runnings");
-  console.log("sectionTop", sectionTop);
+
+  console.log("sectionTopp", sectionTop);
 
   return (
     <div>
@@ -53,7 +26,7 @@ const Navbar = () => {
         <WrapperContainer singlePage={false}>
           <div
             ref={sectionTop}
-            className="flex justify-between sticky top-0 bg-background-dark w-full h-14 items-center z-[100]"
+            className="sticky flex justify-between ml-4 top-0 left-0 bg-background-dark w-full h-14 items-center z-[100]"
           >
             <div>
               <svg
@@ -80,13 +53,13 @@ const Navbar = () => {
                 ></img>
               </Link>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center mr-4">
               <FavoriteMovies></FavoriteMovies>
             </div>
           </div>
-          <div className="flex justify-start w-full items-center overflow-visible">
+          <div className="flex pt-4 justify-start w-full items-center overflow-visible">
             <NavLink
-              to="/"
+              to="/discovery"
               className={
                 isDesktop
                   ? "flex mr-2 font-lato text-xs whitespace-nowrap text-gray h-full"
@@ -97,47 +70,20 @@ const Navbar = () => {
               Početna
             </NavLink>
             <NavLink
-              to="/discovery"
+              to="/novo"
               className="flex mr-2 font-lato text-sm whitespace-nowrap text-gray h-full"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
               Novo
             </NavLink>
             <div className="flex items-center w-full h-12 z-10  ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="gray"
-                className="w-4 h-4 absolute"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
-
-              <input
-                id="search"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                name="search"
-                type="text"
-                placeholder="Pretražite filmove ili serije"
-                className={
-                  isDesktop
-                    ? "w-full font-lato text-white rounded text-sm py-2 bg-[#10161D] pl-8 outline-none"
-                    : "w-full font-lato text-white rounded text-sm py-1 bg-[#10161D] pl-8 outline-none"
-                }
-              ></input>
+              <Search></Search>
             </div>
           </div>
         </WrapperContainer>
       ) : (
         <WrapperContainer singlePage={false}>
-          <div className="flex sticky top-0 bg-background-dark w-full h-14 items-center z-[100]">
+          <div className="flex fixed top-0 left-0 ml-16 bg-background-dark w-full h-14 items-center z-[100]">
             <div>
               <Link to="/">
                 <img
@@ -150,7 +96,7 @@ const Navbar = () => {
             <div className="flex justify-end w-full items-center overflow-visible">
               {/* navigation links */}
               <NavLink
-                to="/"
+                to="/discovery"
                 className={
                   isDesktop
                     ? "flex mx-4 font-lato text-xs whitespace-nowrap text-gray h-full"
@@ -161,7 +107,7 @@ const Navbar = () => {
                 Početna
               </NavLink>
               <NavLink
-                to="/discovery"
+                to="/novo"
                 className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full"
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
@@ -171,38 +117,11 @@ const Navbar = () => {
               {/* //search input */}
               <div className="flex z-[1] grow-[2] h-12 items-center mx-4">
                 <div className="flex items-center w-full h-12 z-10 p-0 ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="gray"
-                    className="w-4 h-4 ml-2 absolute"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
-
-                  <input
-                    id="search"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    name="search"
-                    type="text"
-                    placeholder="Pretražite filmove ili serije"
-                    className={
-                      isDesktop
-                        ? "w-full font-lato text-white rounded text-sm py-1 bg-[#10161D] pl-8 outline-none"
-                        : "w-full font-lato text-white rounded text-sm py-1 bg-[#10161D] pl-8 outline-none"
-                    }
-                  ></input>
+                  <Search></Search>
                 </div>
               </div>
               {/* navbar button */}
-              <div className="flex min-w-[92px] items-center cursor-pointer ">
+              <div className="flex min-w-[92px] items-center cursor-pointer mr-32 ">
                 <Button
                   size="sm"
                   variant="outlined"
@@ -210,7 +129,7 @@ const Navbar = () => {
                   className={
                     isDesktop
                       ? "hidden"
-                      : "font-lato mr-4 text-sm normal-case font-light"
+                      : "font-lato text-sm normal-case font-light"
                   }
                 >
                   Prijava
@@ -222,7 +141,7 @@ const Navbar = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="white"
-                    className="w-6 h-6 text-base m-0"
+                    className="w-6 h-6 text-base ml-2"
                   >
                     <path
                       strokeLinecap="round"

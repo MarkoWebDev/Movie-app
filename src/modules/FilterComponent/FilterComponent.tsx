@@ -12,6 +12,7 @@ const FilterComponent = () => {
   const [genresButtons, setGenresButtons] = useState<any[]>([]);
   const { state, getFilteredMovies } = useContext<any>(GlobalMovieContext);
   const { handleAddError } = useContext<any>(InterceptorContext);
+  const [active, setActive] = useState<any>("");
   const [slider, setSlider] = useState<any>(10);
 
   console.log("value", state);
@@ -64,6 +65,13 @@ const FilterComponent = () => {
     }
   };
 
+  const filterMovies = (e: any, id: any) => {
+    console.log("event", e);
+    setActive(e.target.id);
+    console.log("buttonId", id);
+    handleFilter(id);
+  };
+
   return (
     <>
       <WrapperContainer singlePage={false}>
@@ -82,14 +90,19 @@ const FilterComponent = () => {
             max={10}
             onChange={handleChange}
           ></input> */}
-          {genresButtons?.map((button: any) => {
+          {genresButtons?.map((button: any, index) => {
             return (
               <div key={button.id}>
                 <Button
+                  id={button.id}
                   size="sm"
                   variant="text"
-                  className="text-white text-xs flex items-center"
-                  onClick={() => handleFilter(button.id)}
+                  className={
+                    active == button.id
+                      ? "text-white text-xs flex items-center border border-white rounded-lg"
+                      : "text-white text-xs flex items-center"
+                  }
+                  onClick={(e) => filterMovies(e, button.id)}
                 >
                   <span>
                     <svg
