@@ -10,13 +10,12 @@ const FilterComponent = () => {
   const isMobile = useMediaQuery("(max-width: 540px)");
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [genresButtons, setGenresButtons] = useState<any[]>([]);
-  const { state, getFilteredMovies } = useContext<any>(GlobalMovieContext);
+  const { getFilteredMovies, getMoviesByGrade, getMoviesByYear } =
+    useContext<any>(GlobalMovieContext);
   const { handleAddError } = useContext<any>(InterceptorContext);
   const [active, setActive] = useState<any>("");
-  const [slider, setSlider] = useState<any>(10);
-
-  console.log("value", state);
-  // console.log("slider", slider);
+  const [slider, setSlider] = useState<number | any>(0);
+  const [year, setYear] = useState<number | any>(0);
 
   /**
    * Get genres of the movies
@@ -31,23 +30,17 @@ const FilterComponent = () => {
       const data = await response.data.genres;
       setGenresButtons(data);
       sessionStorage.setItem("genres", JSON.stringify(data));
-      console.log("genres", data);
     } catch (err) {
       handleAddError(err);
       console.log(err);
     }
   };
-  /**
-   * Get genres of the movies
-   * check if session storage have genres of the movies
-   * if not call api
-   */
   useEffect(() => {
     getGenres();
   }, []);
 
   /**
-   * Get genres of the movies based on aram
+   * Get genres of the movies based on param
    * @param {number} genreId
    * filter movies based on genres
    */
@@ -57,8 +50,9 @@ const FilterComponent = () => {
         `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=${genreId}`
       );
       const data: any = await response.data.results;
-      console.log("data", data);
       getFilteredMovies(data);
+      setSlider(0);
+      setYear(0);
     } catch (err) {
       handleAddError(err);
       console.log(err);
@@ -66,30 +60,61 @@ const FilterComponent = () => {
   };
 
   const filterMovies = (e: any, id: any) => {
-    console.log("event", e);
     setActive(e.target.id);
-    console.log("buttonId", id);
     handleFilter(id);
+  };
+
+  const handleGradeSlider = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSlider(value);
+    if (slider !== 0) {
+      getMoviesByGrade(slider);
+    }
+  };
+  const handleYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setYear(value);
+    if (year !== 0) {
+      getMoviesByYear(year);
+    }
   };
 
   return (
     <>
       <WrapperContainer singlePage={false}>
+        <div>
+          <div className="pt-10">
+            <p className="text-[#78a6b8] font-lato font-medium text-xs">
+              Rating
+            </p>
+            <input
+              name="rating"
+              type="range"
+              value={slider}
+              min={1}
+              max={10}
+              onChange={handleGradeSlider}
+            ></input>
+          </div>
+          <div>
+            <p className="text-[#78a6b8] font-lato font-medium text-xs">Year</p>
+            <input
+              name="year"
+              type="range"
+              value={year}
+              min={2020}
+              max={2024}
+              onChange={handleYear}
+            ></input>
+          </div>
+        </div>
         <div
           className={
             isMobile
               ? "grid grid-cols-2 content-center py-4"
-              : "grid grid-cols-4 content-center"
+              : "grid grid-cols-6 content-center"
           }
         >
-          {/* <input
-            className="rotate-[270deg]"
-            name="rating"
-            type="range"
-            min={1}
-            max={10}
-            onChange={handleChange}
-          ></input> */}
           {genresButtons?.map((button: any, index) => {
             return (
               <div key={button.id}>

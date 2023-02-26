@@ -18,7 +18,7 @@ const HomePageNavbar = () => {
               <img src={logo} alt="logo"></img>
             </div>
             <div className="flex items-center">
-              <NavLink to="/discovery">
+              <NavLink to="/novo">
                 <p className="flex mx-4 font-lato text-sm whitespace-nowrap text-gray h-full cursor-pointer hover:text-white">
                   Novo
                 </p>
@@ -79,7 +79,7 @@ const HomePageNavbar = () => {
               </div>
             </div>
             <div className="flex items-center pt-4">
-              <NavLink to="/discovery">
+              <NavLink to="/novo">
                 <p className="flex  font-lato text-sm whitespace-nowrap text-gray h-full cursor-pointer hover:text-white">
                   Novo
                 </p>

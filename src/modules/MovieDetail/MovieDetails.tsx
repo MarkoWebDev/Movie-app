@@ -16,8 +16,6 @@ const MovieDetails = () => {
     let day = date?.slice(8, 10);
     return `${day}.${month}.${year}`;
   };
-
-  console.log("details", state.movieDetails);
   return (
     <div>
       <WrapperContainer singlePage={true}>

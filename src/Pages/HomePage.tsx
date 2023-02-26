@@ -1,5 +1,4 @@
 import React from "react";
-
 import HomePageLayout from "../modules/HomePageLayout/HomePageLayout";
 import Footer from "../modules/footer/Footer";
 import HomePageNavbar from "../modules/navbar/HomePageNavbar";

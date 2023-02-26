@@ -8,7 +8,6 @@ import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 const GridMovies = () => {
   const isTablet = useMediaQuery("(max-width: 768px)");
   const isMobile = useMediaQuery("(max-width: 540px)");
-  console.log("GridMovies running");
   return (
     <WrapperContainer singlePage={false}>
       <div>

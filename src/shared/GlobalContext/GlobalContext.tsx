@@ -1,4 +1,10 @@
-import React, { createContext, useReducer, useEffect, useRef } from "react";
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useRef,
+  useMemo,
+} from "react";
 import { GlobalReducer } from "../GlobalReducer/GlobalReducer";
 import { actionTypes } from "../GlobalReducer/GlobalReducer";
 
@@ -35,9 +41,6 @@ const GlobalContext = ({ children }: any) => {
     );
   }, [state.movieDetails]);
 
-  const getMoviesByYear = (num: any) => {
-    dispatch({ type: actionTypes.FILTER_MOVIES_BY_YEAR, payload: num });
-  };
   const getFilteredMovies = (data: any) => {
     dispatch({ type: actionTypes.GENRES_MOVIES, payload: data });
   };
@@ -56,18 +59,34 @@ const GlobalContext = ({ children }: any) => {
   const handleScroll = () => {
     sectionTop.current?.scrollIntoView({ behavior: "smooth" });
   };
-
-  const value: any = {
-    state: state,
-    getMoviesByYear: getMoviesByYear,
-    getFilteredMovies: getFilteredMovies,
-    getLastMovies: getLastMovies,
-    getSingleMovieDetails: getSingleMovieDetails,
-    addToFavorites: addToFavorites,
-    removeFromFavorites: removeFromFavorites,
-    handleScroll: handleScroll,
-    sectionTop: sectionTop,
+  const getMoviesByGrade = (slider: any) => {
+    dispatch({
+      type: actionTypes.FILTER_MOVIES_BY_GRADE,
+      payload: slider,
+    });
   };
+  const getMoviesByYear = (year: any) => {
+    dispatch({
+      type: actionTypes.FILTER_MOVIES_BY_YEAR,
+      payload: year,
+    });
+  };
+
+  const value: any = useMemo(
+    () => ({
+      state: state,
+      getFilteredMovies: getFilteredMovies,
+      getLastMovies: getLastMovies,
+      getSingleMovieDetails: getSingleMovieDetails,
+      addToFavorites: addToFavorites,
+      removeFromFavorites: removeFromFavorites,
+      handleScroll: handleScroll,
+      sectionTop: sectionTop,
+      getMoviesByGrade: getMoviesByGrade,
+      getMoviesByYear: getMoviesByYear,
+    }),
+    [state]
+  );
 
   return (
     <div>
