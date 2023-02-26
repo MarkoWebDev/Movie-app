@@ -21,17 +21,17 @@ const FavoriteMovies = () => {
             Moja lista
           </p>
         </MenuHandler>
-        <MenuList className="bg-background-dark">
+        <MenuList className="scroll-bar bg-background-dark overflow-y h-auto max-h-64">
           {state?.favorites?.length > 0 ? (
             <div>
               {state?.favorites?.map((item: any) => {
                 return (
-                  <div key={item.id}>
-                    <MenuItem className="flex bg-background-dark justify-between items-center outline-none  hover:bg-transparent border-0">
-                      <div className="outline-none hover:border-0">
+                  <div key={item.id} className="">
+                    <MenuItem className="flex bg-background-dark justify-between items-center outline-none hover:bg-transparent border-0">
+                      <div className="outline-none border-0 hover:border-0">
                         {" "}
                         <img
-                          className="h-16 w-14 bg-center bg-no-repeat bg-cover rounded-md "
+                          className="h-16 w-14 bg-center bg-no-repeat bg-cover rounded-md border-0"
                           src={`${url}${
                             item?.poster_path || item?.backdrop_path
                           } `}

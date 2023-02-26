@@ -9,8 +9,6 @@ const Footer = () => {
   const isDesktop = useMediaQuery("(max-width: 1024px)");
   const isMobile = useMediaQuery("(max-width: 520px)");
   let { pathname } = useLocation();
-  console.log("location", pathname);
-  console.log("Footer running");
   return (
     <div className={pathname !== "/" ? "bg-background-dark" : "bg-black"}>
       <div className="flex justify-center flex-col items-center p-5">

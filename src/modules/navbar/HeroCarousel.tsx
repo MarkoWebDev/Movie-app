@@ -7,7 +7,6 @@ import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
 const HeroCarousel = () => {
   const isLargeDesktop = useMediaQuery("(max-width: 1500px)");
   const isDesktop = useMediaQuery("(max-width: 1024px)");
-  console.log("HeroCarousel running");
   return (
     <div>
       {isLargeDesktop ? (

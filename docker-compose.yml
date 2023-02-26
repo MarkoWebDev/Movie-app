@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  app:
+    container_name: movie-app-dev
+    image: movie-app-dev
+    build:
+      target: development
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3001:3000

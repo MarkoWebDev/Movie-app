@@ -12,14 +12,8 @@ const Navbar = () => {
   let activeStyle = {
     color: "white",
   };
-
   const isDesktop = useMediaQuery("(max-width: 1024px)");
   const { sectionTop } = useContext<any>(GlobalMovieContext);
-
-  console.log("Navbar runnings");
-
-  console.log("sectionTopp", sectionTop);
-
   return (
     <div>
       {isDesktop ? (

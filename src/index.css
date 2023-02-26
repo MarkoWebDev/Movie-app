@@ -31,4 +31,6 @@
 .carousel-content.show-6 > * {
   width: calc(100% / 6);
 }
-
+.scroll-bar::-webkit-scrollbar {
+  display: none;
+}

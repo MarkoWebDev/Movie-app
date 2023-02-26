@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { InterceptorContext } from "../../core/ErrorInterceptorContext";
 import { Button } from "@material-tailwind/react";
 import useMediaQuery from "../../shared/MediaQueryHook/MediaQuery";
+import { Alert } from "@material-tailwind/react";
 
 const MoviesLayout = () => {
   const isMobile = useMediaQuery("(max-width: 570px)");
@@ -20,6 +21,10 @@ const MoviesLayout = () => {
   //base URL for image
   const url = "https://image.tmdb.org/t/p/original/";
 
+  /**
+   * get movies based on genre
+   * display them as initial movies
+   */
   const getMovies = async () => {
     setLoading(true);
     try {
@@ -27,7 +32,6 @@ const MoviesLayout = () => {
         `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=12`
       );
       const data = await response.data.results;
-      console.log("lastest", data);
       getLastMovies(data);
       setLoading(false);
     } catch (err) {
@@ -68,7 +72,7 @@ const MoviesLayout = () => {
             {state?.movies?.map((movie: any, index: number) => {
               return (
                 <div
-                  key={movie.id}
+                  key={index}
                   className={
                     isMobile
                       ? "flex justify-center items-center cursor-pointer py-2"
@@ -106,7 +110,10 @@ const MoviesLayout = () => {
                       {state.favorites.map((item: any) => {
                         if (item.id === movie.id)
                           return (
-                            <div className="pb-2 flex justify-center text-center">
+                            <div
+                              className="pb-2 flex justify-center text-center"
+                              key={movie.id}
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -174,8 +181,15 @@ const MoviesLayout = () => {
           <Spinner></Spinner>
         </div>
       )}
+      {state.movies.length <= 0 && (
+        <div className="flex justify-center items-center text-center">
+          <Alert color="red">
+            Something went wrong, reset the filter or refresh the page
+          </Alert>
+        </div>
+      )}
     </WrapperContainer>
   );
 };
 
-export default MoviesLayout;
+export default React.memo(MoviesLayout);

@@ -26,7 +26,6 @@ const HeroHeader = () => {
   const month: number = new Date().getMonth();
   const isMobile = useMediaQuery("(max-width: 520px)");
   const isTablet = useMediaQuery("(max-width: 540px)");
-  console.log("HeroHeader running");
 
   return (
     <div>
