@@ -181,9 +181,9 @@ const MovieDetails = () => {
                   {state?.movieDetails?.overview}
                 </p>
               </div>
-              {state?.favorites?.map((item: any) => {
-                if (item?.id === state?.movieDetails?.id) {
-                  return (
+              {state?.favorites?.map(
+                (item: any) =>
+                  item?.id === state?.movieDetails?.id && (
                     <div className="pb-4 " key={item.id}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -200,9 +200,8 @@ const MovieDetails = () => {
                         />
                       </svg>
                     </div>
-                  );
-                }
-              })}
+                  )
+              )}
               <Button
                 onClick={() => addToFavorites(state?.movieDetails)}
                 variant="outlined"
