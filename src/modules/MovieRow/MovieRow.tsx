@@ -102,8 +102,8 @@ const MovieRow = ({ title, movieApiUrl, grid }: MovieRowProps) => {
                           <div
                             className={`${
                               index < 9
-                                ? "absolute scale-150 text-[#222c38] font-lato left-0 bottom-10 text-9xl font-bold"
-                                : "absolute scale-150 text-[#222c38] font-lato -left-8 bottom-10 text-9xl font-bolds"
+                                ? "absolute scale-150 text-[#222c38] font-lato left-0 bottom-10 text-8xl font-bold -z-10"
+                                : "absolute scale-150 text-[#222c38] font-lato -left-8 bottom-10 text-8xl font-bolds -z-10"
                             }`}
                           >
                             {index + 1}

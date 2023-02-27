@@ -107,9 +107,9 @@ const MoviesLayout = () => {
                         } `}
                         alt={movie.title}
                       ></img>
-                      {state.favorites.map((item: any) => {
-                        if (item.id === movie.id)
-                          return (
+                      {state.favorites.map(
+                        (item: any) =>
+                          item.id === movie.id && (
                             <div
                               className="pb-2 flex justify-center text-center"
                               key={movie.id}
@@ -129,8 +129,8 @@ const MoviesLayout = () => {
                                 />
                               </svg>
                             </div>
-                          );
-                      })}
+                          )
+                      )}
                       <div>
                         <p
                           className={
