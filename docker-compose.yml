@@ -1,8 +1,8 @@
 version: "3.8"
 services:
   app:
-    container_name: movie-app-dev
-    image: movie-app-dev
+    container_name: react-movie-app
+    image: react-movie-app
     build:
       target: development
     volumes:

@@ -44,3 +44,19 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## Building your image
+
+Go to the directory that has your Dockerfile and run the following command to build the Docker image. The -t flag lets you tag your image so it's easier to find later using the docker images command:
+
+### `docker build -t react-movie app .`
+
+## Run the image
+
+Running your image with -d runs the container in detached mode, leaving the container running in the background. The -p flag redirects a public port to a private port inside the container. Run the image you previously built:
+
+### `docker run -it -p 3001:3000 -d react-movie-app`
+
+If you are not in the root folder, you have to specify the name of the docker compose file. Use the below command:
+
+### `docker compose -f docker-compose.yml up`
